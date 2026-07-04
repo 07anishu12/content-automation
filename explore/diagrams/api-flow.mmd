@@ -1,0 +1,35 @@
+sequenceDiagram
+    participant P as Pipeline (Python/Node)
+    participant A as Apify API
+    participant OR as OpenRouter API
+    participant S as Slack API
+    participant L as LinkedIn Browser Context
+
+    P->>A: POST /v2/acts/.../runs (Start Scraper)
+    A-->>P: Return run_id & dataset_id
+    loop Poll Status
+        P->>A: GET /v2/actor-runs/{run_id}
+        A-->>P: Return Status (e.g. SUCCEEDED)
+    end
+    P->>A: GET /v2/datasets/{dataset_id}/items
+    A-->>P: Return Reddit posts JSON
+
+    P->>OR: POST /api/v1/chat/completions (Generate Drafts)
+    OR-->>P: Return text drafts & layout JSONs
+
+    P->>OR: POST /api/v1/chat/completions (Sanitize Banned Words)
+    OR-->>P: Return clean text drafts
+
+    P->>S: POST /api/files.getUploadURLExternal
+    S-->>P: Return upload_url & file_id
+    P->>S: POST upload_url (Upload binary PDF/PNG)
+    S-->>P: Status 200 (Success)
+    P->>S: POST /api/files.completeUploadExternal
+    S-->>P: Return ok: true
+
+    P->>S: POST /api/chat.postMessage (Send post texts)
+    S-->>P: Return ok: true
+
+    P->>L: Connect CDP browser & authenticate session
+    P->>L: Navigate scheduling modal, type post, and upload assets
+    L-->>P: Confirm scheduled posts

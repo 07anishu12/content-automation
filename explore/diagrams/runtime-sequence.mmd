@@ -1,0 +1,38 @@
+sequenceDiagram
+    autonumber
+    participant CLI as Orchestrator / Cron
+    participant F as Data Fetchers
+    participant AI as LLM (OpenRouter)
+    participant C as Asset Compiler
+    participant S as Slack Sender
+    participant L as LinkedIn Browser
+
+    CLI->>F: Execute fetch_reddit_apify.py & fetch_ai_news_rss.py
+    F-->>CLI: Save JSON feeds (reddit_data.json, ai_news_data.json)
+    
+    CLI->>AI: Execute generate_all_content_gemini.py
+    AI->>AI: Load JSON feeds & logs
+    AI->>AI: Call OpenRouter (Generate texts & JSON metadata)
+    AI-->>CLI: Save drafts, carousel_data.json, infographic_data.json
+    
+    CLI->>AI: Execute correct_posts.py
+    AI->>AI: Scan drafts & call OpenRouter for word cleanup
+    AI-->>CLI: Overwrite cleaned texts
+    
+    CLI->>C: Execute build_carousel_today.cjs & cap_infographic_today.cjs
+    C->>C: Generate slide HTML templates
+    C->>C: Launch Puppeteer Chrome
+    C->>C: Screenshot HTML files to PNGs
+    C->>C: Merge slide PNGs to PDF (carousel.pdf)
+    C-->>CLI: Save PDF and PNG assets
+    
+    CLI->>S: Execute send_to_slack.py
+    S->>S: Read texts, PDF, and PNG
+    S->>S: Call Slack Web API (Files & Messages)
+    S-->>CLI: Completed successfully
+    
+    CLI->>L: Execute schedule_all_posts.cjs
+    L->>L: Connect Puppeteer to LinkedIn session
+    L->>L: Type text, attach PDF/PNG, select date/time slot
+    L->>L: Confirm scheduled posts
+    L-->>CLI: Pipeline run completed

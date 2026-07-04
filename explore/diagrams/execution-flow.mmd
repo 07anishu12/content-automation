@@ -1,0 +1,10 @@
+graph TD
+    Start([Pipeline Triggered]) --> Step1[1. Data Fetching: Reddit & AI Feeds]
+    Step1 --> Step2[2. Read Historical Logs & Doctrine]
+    Step2 --> Step3[3. LLM Generation: generate_all_content_gemini.py]
+    Step3 --> Step4[4. Clean Posts: correct_posts.py]
+    Step4 --> Step5[5. Generate Visuals: HTML -> PNG/PDF]
+    Step5 --> Step6[6. Deliver to Slack: send_to_slack.py]
+    Step6 --> Step7[7. Schedule on LinkedIn: schedule_all_posts.cjs]
+    Step7 --> Step8[8. Update Local History JSON Logs]
+    Step8 --> Finish([Pipeline Finished])

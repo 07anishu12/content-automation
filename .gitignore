@@ -1,0 +1,42 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Project Specific
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+carousel-routine/temp/
+carousel-routine/output/
+slack_downloads/
+reddit_data.json
+ai_news_data.json
+carousel_data.json
+infographic_data.json
+linkedin_posts_today.txt
+linkedin_posts_*.txt
+performance_posts_*.txt
+linkedin-infographic.html
+linkedin-infographic-*.png
+*.pdf
+*.png
+.puppeteer_profile/

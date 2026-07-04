@@ -1,0 +1,14 @@
+graph TD
+    fetch_apify[fetch_reddit_apify.py] -->|reddit_data.json| gen_gemini[generate_all_content_gemini.py]
+    fetch_rss[fetch_ai_news_rss.py] -->|ai_news_data.json| gen_gemini
+    
+    gen_gemini -->|linkedin_posts_today.txt| correct_posts[correct_posts.py]
+    gen_gemini -->|carousel_data.json| gen_carousel[generate_carousel_today.py]
+    gen_gemini -->|infographic_data.json| gen_info[generate_infographic_today.py]
+    
+    gen_carousel -->|slide HTMLs| build_carousel[build_carousel_today.cjs]
+    gen_info -->|linkedin-infographic.html| cap_info[cap_infographic_today.cjs]
+    
+    correct_posts -->|Clean Text| slack[send_to_slack.py] & schedule[schedule_all_posts.cjs]
+    build_carousel -->|carousel.pdf| slack & schedule
+    cap_info -->|infographic.png| slack & schedule

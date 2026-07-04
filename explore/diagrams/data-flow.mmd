@@ -1,0 +1,11 @@
+graph TD
+    A[Raw API Feeds] -->|Filter out comments & select keys| B[reddit_data.json & ai_news_data.json]
+    B -->|Map topics & generate drafts| C[Raw Texts Draft File]
+    C -->|Sanitize banned words & insert brand name| D[Clean Texts File]
+    
+    B -->|Generate dynamic style configs| E[carousel_data.json & infographic_data.json]
+    E -->|Merge with HTML base templates| F[slide-0x.html & linkedin-infographic.html]
+    F -->|Puppeteer screenshots| G[Slide PNGs & Infographic PNG]
+    G -->|Merge slide PNGs| H[carousel.pdf]
+    
+    D & H & G -->|Deliver to Slack / schedule on LinkedIn| I[Published Content Batch]

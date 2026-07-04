@@ -1,0 +1,39 @@
+graph TD
+    subgraph Research Layer
+        A1[fetch_reddit_apify.py]
+        A2[fetch_reddit_fallback.py]
+        A3[fetch_ai_news_rss.py]
+    end
+
+    subgraph AI Layer
+        B1[generate_all_content_gemini.py]
+        B2[correct_posts.py]
+    end
+
+    subgraph Asset Generation Layer
+        C1[generate_carousel_today.py]
+        C2[build_carousel_today.cjs]
+        C3[generate_infographic_today.py]
+        C4[cap_infographic_today.cjs]
+    end
+
+    subgraph Publishing Layer
+        D1[send_to_slack.py]
+        D2[schedule_all_posts.cjs]
+    end
+
+    subgraph Configuration & Storage
+        E1[.env]
+        E2[Logs: carousel-hook-log.json, etc.]
+    end
+
+    A1 & A2 & A3 -->|Raw Feeds JSON| B1
+    E1 -->|Load Secrets| B1 & B2 & D1 & D2
+    E2 -->|Deduplication & Hook Styles| B1
+    B1 -->|Draft Texts| B2
+    B1 -->|Output JSON| C1 & C3
+    B2 -->|Clean Text| D1 & D2
+    C1 -->|Slide HTML| C2
+    C3 -->|Infographic HTML| C4
+    C2 -->|Compiled PDF| D1 & D2
+    C4 -->|Infographic PNG| D1 & D2
