@@ -1,8 +1,9 @@
-# Daily LinkedIn Posts Pipeline
+# Multi-Platform Content Automation Platform (V2)
 
-> Complete automation system for generating, building, and scheduling LinkedIn content for Founders Wing: 16 posts per day (4 Reddit-based + 7 AI news + 5 report-driven performance posts) with carousel PDFs, infographic PNGs, and Slack delivery.
+> Complete automation system for generating, building, and scheduling multi-platform content (LinkedIn + Instagram) for any configurable niche/business domain (e.g. AI, Finance, Fitness, Marketing, Real Estate).
 
-> **Content positioning — the "Varun Mayya of LinkedIn."** As of 2026-06-14, every stream is governed by [`content-doctrine.md`](content-doctrine.md): we write for ambitious generalists who want to know where AI is going and how to get ahead, framed around AI's impact on work, income, skills, and the future. Technical tutorials, indie-hacker tactics, and tool how-tos are out (they underperform); future-of-work, opportunity, and accessible explainers are in. FounderWing stays the brand. The doctrine overrides older topic guidance in any skill file.
+**Niche-Agnostic Campaign Engine**: As of V2, the system accepts target niches, brands, and styling templates dynamically from [core/config/config.py](file:///Users/anny/Downloads/Archives/instagram/core/config/config.py) and generates Instagram-tailored visual slides, reels copy, alt tags, and hashtags campaigns.
+
 
 ---
 
@@ -242,11 +243,30 @@ The `founderswing_linkedin_content_report.md` is explicit that the account's cur
 
 ---
 
-## Sample Outputs
+---
 
-The `sample-outputs/` folder contains a complete set from the June 12, 2026 run:
-- `linkedin_posts_20260612.txt` — All 11 posts in text format
-- `linkedin_posts_20260612.html` — Carousel HTML slides
-- `linkedin_posts_20260612.pdf` — Compiled carousel PDF
-- `linkedin-infographic-20260612.png` — Infographic PNG
-# content-automation
+## Instagram V2 Automation Pipeline
+
+The V2 release introduces a multi-platform configuration setup that automates Instagram content loops for any targeted business niche or domain (e.g., Finance, SaaS, Health, AI).
+
+### Configuration Options
+Edit [core/config/config.py](file:///Users/anny/Downloads/Archives/instagram/core/config/config.py) to configure:
+* `TARGET_NICHE`: Your business domain (e.g., "Personal Finance")
+* `TARGET_BRAND`: Your brand name (e.g., "FounderWing")
+* `TARGET_BRAND_COLOR`: Primary theme color hex
+
+### Running the Instagram Pipeline
+Execute the V2 orchestrator directly:
+```bash
+python3 generate_instagram_campaign.py
+```
+
+This runs:
+1. **Configurable Research**: Fetches relevant data points from RSS feeds and subreddits matching the target niche.
+2. **Topic Selection**: Filters and ranks topics based on engagement, business relevance, and trend strength.
+3. **Instagram Creative Engine**: Generates captions, hashtags, first comments, reels script voiceovers, and alt tags.
+4. **Branded Visuals**: Builds HTML visuals dynamically and compiles PNG infographics and multi-page slide PDFs.
+5. **Campaign Approval**: Generates and saves scheduled draft parameters.
+
+Documentation directories: [explore/](file:///Users/anny/Downloads/Archives/instagram/explore/)
+
