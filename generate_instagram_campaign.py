@@ -21,8 +21,22 @@ def main():
     
     print(f"Fetched {len(reddit_items)} Reddit posts and {len(news_items)} RSS articles.")
     
+    if not reddit_items and news_items:
+        print("Reddit scraping was blocked/empty. Falling back to RSS news articles...")
+        from core.models.models import ResearchItem
+        for article in news_items:
+            reddit_items.append(ResearchItem(
+                subreddit=article.source,
+                title=article.title,
+                selftext=article.description,
+                ups=100,
+                num_comments=10,
+                url=article.url,
+                image_url=None
+            ))
+            
     if not reddit_items:
-        print("Error: No research items found. Exiting.")
+        print("Error: No research items found from Reddit or RSS. Exiting.")
         sys.exit(1)
         
     # 2. Topic Intelligence and scoring

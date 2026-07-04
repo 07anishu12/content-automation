@@ -14,3 +14,9 @@ This document tracks all changes and transitions during the LinkedIn to Instagra
   * Developed [core/publishing/instagram_publisher.py](file:///Users/anny/Downloads/Archives/instagram/core/publishing/instagram_publisher.py) to manage post drafts.
   * Developed [core/analytics/analytics_engine.py](file:///Users/anny/Downloads/Archives/instagram/core/analytics/analytics_engine.py) to log and track metric points.
   * Created master orchestrator script [generate_instagram_campaign.py](file:///Users/anny/Downloads/Archives/instagram/generate_instagram_campaign.py) to integrate components.
+* **2026-07-04**: Enhanced visual compiler features:
+  * Created premium vertical slide template `adapters/instagram/assets/instagram-carousel-template.html` conforming to standard 1080x1350 Instagram aspect ratio.
+  * Created [generate_carousel_instagram.py](file:///Users/anny/Downloads/Archives/instagram/generate_carousel_instagram.py) to build HTML slides from template.
+  * Created [build_carousel_instagram.cjs](file:///Users/anny/Downloads/Archives/instagram/build_carousel_instagram.cjs) to launch Puppeteer and export 1080x1350 PNG images.
+  * Added fallback support in [generate_instagram_campaign.py](file:///Users/anny/Downloads/Archives/instagram/generate_instagram_campaign.py) to use RSS articles when Reddit limits are hit.
+  * Added premium content mockup campaign fallback in [core/content/instagram_content_engine.py](file:///Users/anny/Downloads/Archives/instagram/core/content/instagram_content_engine.py) to prevent execution errors when OpenRouter is unauthenticated.

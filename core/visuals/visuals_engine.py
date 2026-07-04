@@ -85,7 +85,7 @@ class VisualsEngine:
 
         # Run generator to build slide HTML files
         try:
-            generator_script = os.path.join(config.ROOT_DIR, "generate_carousel_today.py")
+            generator_script = os.path.join(config.ROOT_DIR, "generate_carousel_instagram.py")
             subprocess.run(["python3", generator_script], check=True)
             return True
         except Exception as e:
@@ -95,7 +95,7 @@ class VisualsEngine:
     def compile_assets(self) -> bool:
         # Render PNGs and PDF using Puppeteer
         try:
-            compiler_script = os.path.join(config.ROOT_DIR, "build_carousel_today.cjs")
+            compiler_script = os.path.join(config.ROOT_DIR, "build_carousel_instagram.cjs")
             subprocess.run(["node", compiler_script], check=True)
             
             # Screenshot infographic

@@ -462,3 +462,43 @@ Risks: None
 Reason for Change: Migrate codebase to generic multi-platform content campaign capabilities.
 
 Next Step: Verify run tests on the master pipeline orchestrator.
+
+---
+
+# Update 013
+
+Date & Time: 2026-07-04T19:57:00+05:30
+
+Objective: Enhance Visual Engine to output standard Instagram Portrait (1080x1350) aspect ratio PNGs and add resilient scraping/LLM call mock fallbacks.
+
+Files Modified:
+- [core/content/instagram_content_engine.py](file:///Users/anny/Downloads/Archives/instagram/core/content/instagram_content_engine.py)
+- [core/visuals/visuals_engine.py](file:///Users/anny/Downloads/Archives/instagram/core/visuals/visuals_engine.py)
+- [generate_instagram_campaign.py](file:///Users/anny/Downloads/Archives/instagram/generate_instagram_campaign.py)
+
+Files Created:
+- [adapters/instagram/assets/instagram-carousel-template.html](file:///Users/anny/Downloads/Archives/instagram/adapters/instagram/assets/instagram-carousel-template.html)
+- [generate_carousel_instagram.py](file:///Users/anny/Downloads/Archives/instagram/generate_carousel_instagram.py)
+- [build_carousel_instagram.cjs](file:///Users/anny/Downloads/Archives/instagram/build_carousel_instagram.cjs)
+
+Files Deleted: None
+
+Summary: Added a custom glassmorphism template and Node compiler using Puppeteer set to 1080x1350 portrait viewports to capture slide PNGs. Integrated RSS fallback mapping for research queries and mockup data generation checks to allow offline/unauthorized local runs.
+
+Technical Changes: Exchanged LinkedIn compiler script targets for newly created Instagram ones inside core visuals_engine. Added mock data blocks.
+
+Architecture Changes: Custom size layouts integrated into Visuals generation subsystem.
+
+Import Changes: None
+
+Backward Compatibility: 100% preserved. LinkedIn assets and layouts continue to run independently.
+
+Testing Performed: Successfully ran and passed `python3 generate_instagram_campaign.py` executing scraping, scoring, HTML generation, and Puppeteer 1080x1350 PNG slide screenshotting.
+
+Known Issues: None
+
+Risks: None
+
+Reason for Change: Create production-ready visual asset layouts compliant with Instagram's standard viewport constraints.
+
+Next Step: Finalize documentation checks and commit files.

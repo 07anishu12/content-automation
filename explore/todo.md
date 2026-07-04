@@ -14,4 +14,5 @@ List of tasks to complete the project migration to Instagram V2.
 - [x] Develop `InstagramPublisher` managing draft approval state sequences.
 - [x] Create generic `AnalyticsEngine` data models.
 - [x] Build V2 Master orchestrator script in root (`generate_instagram_campaign.py`).
+- [x] Develop premium Instagram Portrait (1080x1350) template and Node compiler.
 - [ ] Connect production cron runner to use `generate_instagram_campaign.py` daily.
